@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .moveAbleObject{
+            position:absolute;
+            height: 200px;
+            width: 200px;
+            left: 50%;
+            top: 50%;
+            background-color: blueviolet;
+        }
+
+        .obj2  {
+            position:relative;
+            height: 50px;
+            width: 50px;
+            left: auto;
+            top: auto;
+            background-color: blueviolet;            
+        }
+
+        #obj3_a, #obj3_b {
+            position:relative;
+            height: 50px;
+            width: 50px;
+            background-color: rgb(153, 121, 183);
+        
+        }
+        .dragableArea, .dropableArea{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 500px;
+            height: 500px;           
+            
+        }
+
+        .dragableArea{
+            /* float:left; */
+        }
+        .dropableArea {            
+            position: relative;
+        }
+
+        .container{
+            display: grid;
+            grid-template-columns: 33% 33% 33%;
+            column-gap: 50px;
+        }
+
+        .column1, .column2, .column3 {
+            text-align:center;
+            border: 2px solid #ddd;
+        }
+
+        p {
+            font-size: 24px;
+        }
+        .dndResult {
+            color: #FF0000;
+            font-size: 30px;
+            padding-top: 250px;
+        }
+        .blocker{
+            width: 470px;
+            height: 500px;
+            position:absolute;
+            background-color: transparent;
+            display: none;
+        }
+
+        #submit{
+            width: 120px;
+            height: 40px;
+        }
+
+    </style>
+    <script>
+        var isDown = false;
+        var offset = [0,0];
+        var ele1 = "";
+        var arr1 = [];
+        var corrArray = ["obj2_a", "obj2_c"]
+       
+       let f1 = (e) => {
+            isDown = true;
+            offset = [
+                document.getElementsByClassName("moveAbleObject")[0].offsetLeft - e.clientX, 
+                document.getElementsByClassName("moveAbleObject")[0].offsetTop - e.clientY];           
+                console.log("Function: Down f1" + offset);
+        }
+        
+        let f2 = (e) =>{
+            isDown = false;
+            console.log("Function: Up f2:" + isDown);  
+        }
+
+        let f3 = (e) => {
+            e.preventDefault();
+            if(isDown){
+                document.getElementsByClassName("moveAbleObject")[0].style.left = (e.clientX + offset[0]) + "px";
+                document.getElementsByClassName("moveAbleObject")[0].style.top = (e.clientY + offset[1]) + "px";
+                // console.log("Function: Move f3:" + isDown);
+            }
+            
+             
+        }
+
+        function f4 (e1) {
+            console.log("drag started:" +e1);
+            if (e1.dataTransfer){
+                ele1 = e1.target.id
+                console.log(ele1)
+            }
+            else{
+                console.error("Data transfer object is undefined.");
+            }
+            
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            ev.target.appendChild(document.getElementById(ele1));
+            arr1.push(ele1);
+                       
+        }
+
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function isSubarray(subarray, array) {
+            return subarray.every(item => array.includes(item));
+        }
+
+        let f5 = () => {           
+            
+
+            const result = isSubarray(corrArray, arr1);
+
+             if (result == true){
+                console.log("correct !");
+                document.getElementsByClassName("dndResult")[0].innerHTML = "Correct !";
+            }
+            else{
+                console.log("Incorrect !");
+                document.getElementsByClassName("dndResult")[0].innerHTML = "Incorrect !";
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <!-- <div class="moveAbleObject" onmousedown="f1(event);" onmouseup="f2(event);" onmousemove="f3(event);"></div> -->
+    <div class="container">
+        <div class="column1">
+            <p>Dragabbele Area</p><br><br>
+            <div class="dragableArea">        
+                <div id="obj2_a" class="obj2" draggable="true" ondragstart="f4(event);">A</div>
+                <div id="obj2_b" class="obj2" draggable="true" ondragstart="f4(event);">B</div>
+                <div id="obj2_c" class="obj2" draggable="true" ondragstart="f4(event);">C</div>
+            </div>
+        </div>
+        
+        <div class="column2">
+            <p>Droppable Area</p><br><br>
+            <div class="dropableArea">
+                <div id="obj3_a" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                <div id="obj3_b" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            </div>
+        </div>
+
+        <div class="column3">
+            <p>Result here</p>
+            <p class="dndResult"></p>
+        </div>
+
+        <button id="submit" onclick="f5();">Submit</button>
+
+        <div class="blocker">
+
+        </div>
+        
+    </div>
+    
+    
+    
+</body>
+</html>
