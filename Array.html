@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        let arr1 = [12,223,33,4,5,33,6,5,12];
+        let arr2 = [], arr3 = [];
+        const currentDate = new Date();
+        const pattern = /[0-9]+/;
+        const squareRoot = Math.sqrt(25);
+
+        let arr5 = [10,12,16,28,450,250,90,70,20,34]
+        let arr50 = [10,59,90,55,61,54]
+        let arr51 = [55,61,90,10,59,54]
+        
+        let arr8 = [10, 20, "ev"];
+        console.log("arr8: " +arr8);
+        arr8.fill("staticValue");
+        console.log("arr8 updated value after fill function is: " +arr8);
+
+        //const variable can also be changed through indexing of array
+        const arr11 = [22, 33];
+        arr11[0] = "gg";
+
+        console.log(arr11);
+              
+        let a1 = arr5.every(function(num){
+            if (num > 70) { return num}
+        })
+        console.log("a1 value is: " + a1)
+
+        let aSum = arr5.every(function(num){
+            if (num%2 === 0) { return num}
+        })
+        console.log("aSum value is: " + aSum)
+
+        let checkOdd = function(val, index, arr){
+            if(arr[index]%2 != 0) { return val}
+        }
+
+        let aOdd = arr50.every(checkOdd)
+        console.log("aOdd: " +aOdd)
+
+        // Check if two array are similar
+        let checkArrayEqual = (arr1,arr2) => {
+            let tempArr = [];
+            arr1.forEach(function(value,index,array){
+                tempArr.push(arr2.includes(value)); 
+            })
+            let valEqual =  tempArr.every(function(val,index,arr){
+                if (arr[index] == true){ return val};
+            })
+            return valEqual;
+          }
+
+        console.log("if array is equal:" +checkArrayEqual(arr50,arr51));
+
+        // Check if two array are similar End
+        
+          let a2 = Array.from("12222333q34243");
+          console.log("Type of a2" +Object.prototype.toString.call(a2) + " Value is:" +a2);
+          console.log(a2.length)
+
+          let set5 = new Set(a2);
+          console.log("set5 value is" +set5)
+          a2 = [...set5];
+          console.log("a2 value is" +a2);
+          console.log(Object.prototype.toString.call(a2));
+
+          let arr9 = [];
+          arr9 = arr5.map(function(val){
+            return val*10 
+          });
+
+          console.log("arr9 value is:" +arr9)
+
+        //   Map function through arrow function
+        arr9 = arr5.map(val => val*val)
+        console.log("Updated arr9 value in squre format:" +arr9)
+
+        arr9 = arr5.map((val,index,arr) => arr[index]*arr[index]*arr[index])
+        console.log("Updated arr9 value in cube format:" +arr9)
+
+        let add = () => {
+            return 15;
+        }
+
+        let set4 = new Set(arr1);
+        let arr4 = [...set4]
+        console.log("arr4 value is:" + arr4);
+        
+        // console different functions
+        console.table(arr4);
+        console.error("This is error msg generated through <code>");
+        console.warn("This is warning msg generated through <code>");
+
+
+        arr4.sort((a,b) => b-a); //Descending order
+        console.log("arr4 value after sorting is:" + arr4);
+
+        // multiply each array value from 10
+        arr1.forEach((item,index) => { arr1[index]  = item*10; })
+        console.log(arr1);
+
+        arr3 = arr1.filter((item,index) => {
+            return item >= 100
+        })
+        
+        let is_array = (arr) => {
+            if (Object.prototype.toString.call(arr) === "[object Array]"){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+
+        console.log(Object.prototype.toString.call(arr3));
+        console.log("Array3 value:" +arr3)
+        arr2 = new Set(arr1);
+        console.log(arr2);
+        console.log(Object.prototype.toString.call(arr2));
+        console.log(Object.prototype.toString.call(arr1));
+        console.log(Object.prototype.toString.call(squareRoot));
+        console.log(is_array(arr1));
+
+        
+        
+    </script>
+</head>
+<body onresize="resizeWindow();">
+    <div class="array1" id="mainArray"></div>
+    <ul class="name">
+        <li>M</li>
+        <li>A</li>
+        <li>N</li>
+        <li>I</li>
+        <li>S</li>
+        <li>H</li>
+    </ul>
+
+    <div class="topicTostudy"></div>
+    <div class="contentA" style="font-size: 40px;width:400px;height:400px;border:10px #000 solid;overflow:scroll;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi quae omnis, quaerat voluptas sit placeat atque aut numquam nihil! Perspiciatis necessitatibus ut nobis dignissimos commodi quos veniam, corrupti suscipit libero laborum dolores ullam doloremque quis iste atque sint consequuntur id cupiditate ipsum, eveniet nostrum voluptates. Quos exercitationem nisi, voluptates quidem sit sequi quibusdam voluptatem delectus autem ipsum quaerat reiciendis dolorum odio iure magnam possimus voluptatibus vero aut dolorem nulla, cum, sint inventore perspiciatis. Aut, debitis voluptates. Ratione, cumque enim necessitatibus quis perspiciatis dolorem in deleniti architecto voluptates a vitae earum? Odit ea neque ipsam voluptatum porro fuga officia adipisci explicabo sunt, qui et quaerat, dolorem natus. Earum nostrum est fugit aspernatur quis quas, recusandae dolorum voluptas vitae voluptate repellat accusamus explicabo blanditiis et deleniti exercitationem maiores! Fugiat ratione mollitia ea est. Est voluptates nihil nostrum ad, fugit voluptatum distinctio corrupti numquam dignissimos dolores, labore cum beatae cumque provident. Nam sunt modi corporis eius ipsa similique magni explicabo excepturi provident! Delectus, provident cumque mollitia ea praesentium officiis veniam nemo eum incidunt cum ut facilis distinctio maxime reprehenderit vero, atque voluptatum, veritatis impedit adipisci. Aspernatur officiis ipsa beatae aliquam, placeat enim optio doloribus debitis esse eaque cupiditate? Enim possimus deleniti velit eligendi!</div>
+    <button id="btn1" type="button">Button.....1</button>
+    <button id="btn2" type="button" onclick="getTopic();">Click here to know about study materials.</button>
+    
+    <h2>Window Object</h2>
+    <button class="fancy-button" onclick="openWin()">Open window </button>&nbsp;&nbsp;<button class="fancy-button" onclick="closeWin()">Close window </button>
+    <button class="fancy-button" onclick="resizeWin()">Resize window </button>
+
+    <h2>Location Object</h2>
+    <button class="fancy-button" onclick="locReload()">Reload Method </button>
+    <button class="fancy-button" onclick="locAssign()">Assign Method</button>
+    <button class="fancy-button" onclick="locReplace()">Replace Method</button>
+</body>
+<script>
+    // console.log(document.querySelector(".name"));
+    let obj1 = document.querySelector(".name").getElementsByTagName("li");
+    console.log(obj1)
+    console.log(Object.prototype.toString.call(obj1));
+    console.log(obj1.length);
+    console.log(document.all)
+
+    console.log("getAttribute property:" +document.querySelector(".array1").getAttribute("id"))
+
+    // To make the comment
+    var newComment = document.createComment("This is comment through dynamic Javascript");
+    console.log(newComment);
+    console.log("this is:" +this);
+
+    
+    // Through JQuery
+    $(".name").find("li").each(function(index,item){
+        console.log($(this).text());
+    })
+
+    // Through Java script
+    document.querySelector("#btn1").addEventListener("click", function(){
+        console.log(this.innerHTML);
+    });
+
+
+    // Function expression
+    let f1 = function(a,b){
+    return Math.floor(a+b);
+    }
+
+    //Arrow function
+    let f2 = (a,b) =>{
+        return Math.floor(a-b);
+    }
+
+    let sum = f1(10,23);
+    console.log("Sum:" +sum);
+
+    let sub = f2(33,23);
+    console.log("Sub:" +sub);
+
+    // "continue" keyword use, "break" keywords exit the loop
+    for (let i=0; i<=5; i++){
+        if (i==2){
+            continue;           
+        }
+        console.log("i value through continue keyword is:" +i);
+    }
+
+    // Exit through "return" keyword from a function
+    let print = () => {
+        for (let i=0; i<=5; i++){
+        if (i==2){
+            return;           
+        }
+        console.log("j value is:" +i);
+        } 
+    }
+    
+    print();
+
+    let de = document.documentElement
+    console.log("de: " +de.lang)
+    de.style.color = "red";
+//    document.title = "Allterree"
+
+console.log(document.domain);
+
+let arrTopic = ["createTextNode_fn","replaceChild_fn", "cloneNode_fn", "contains_fn", "hasChildNodes", "hasAttribute"];
+let getTopic = () => {
+    document.querySelector(".topicTostudy").innerHTML = '<span id="topicContainer"><ul>' +
+       arrTopic.map(val => '<li style="font-size:20px">' +val + '</li>') +
+    '</ul></span>';
+}
+   
+    console.log("Does it contains:" +document.body.contains(document.getElementById("btn3")));
+    console.log("hasAttribute: " +document.querySelector("#mainArray").hasAttribute("class"));
+    console.log("hasChildNode:" +document.querySelector(".topicTostudy").hasChildNodes());
+
+    // window resize
+    let resizeWindow = () => {
+        console.log("Inner Width:" +window.innerWidth);
+        console.log("Inner Height:" +window.innerHeight);
+        console.log("Outer Width:" +window.outerWidth);
+        console.log("Outer Height:" +window.outerHeight);
+    }
+
+    // To open and close window
+    var myWin;
+    let openWin = () => {
+        myWin = window.open("", "_blank", "width:500px;height:500px");
+        myWin.document.write("Hello");
+        myWin.moveTo(400,300);
+        myWin.moveBy(400,300);
+    }
+
+    let closeWin = () => {
+        myWin.close();
+    }
+
+    let resizeWin = () => {
+        window.resizeTo(200,200);
+        // window.resizeBy(200,200); "By" Works on relative position
+    }
+
+    // window.scrollTo(0,20) to scroll to bottom ("To" works on absolute position)
+    // window.scrollTo(0,-20) to scroll to top ("To" works on absolute position)
+    // window.scrollTo(20,0) to scroll to right ("To" works on absolute position)
+    // window.scrollTo(-20,0) to scroll to left ("To" works on absolute position)
+
+    // location object properties
+    console.log(location)
+    console.log(location.hostname)
+    console.log(location.pathname)
+    console.log(location.href)
+
+    // location object methods
+
+    let locReload = () => {
+        location.reload(); //It reloads the page.
+    }
+
+    let locAssign = () => {
+        location.assign("https://translate.google.com/"); //It sets the url to the location bar and history button works here.
+    }
+
+    let locReplace = () => {
+        location.replace("https://translate.google.com/"); //It is just like assign function but It deletes the history it means user can't use browser back buttons.
+    }
+
+    console.log(history) //
+    // history.go(1) or history.go(-1) to move next one or back one in the browser history
+
+    // Window object 2 properties
+    console.log("How much X axis scrolled:" +window.pageXOffset);
+    console.log("How much Y axis scrolled:" +window.pageYOffset);
+
+    let targetDiv = document.querySelector(".contentA");
+    // console.log("How much Y axis scrolled screenTop:" +targetDiv.scrollTop);
+    console.log("How much X axis scrolled through screenLeft:" +targetDiv.scrollLeft);
+
+    // Mouse event co-ordinate
+    document.querySelector(".contentA").addEventListener("mousemove", function(event){
+        console.clear();
+        console.log("Client Y / Client X :" +event.clientX + ":" +event.clientY)
+        console.log("Client Y / Client X :" +event.x + ":" +event.y) //ClientX / ClientY is also indicated by x and y only
+
+        console.log("Screen Y / Screen X :" +event.screenX + ":" +event.screenY) //From screen top and left
+        console.log("Offset Y / Offset X :" +event.offsetX + ":" +event.offsetY) //From element left and top
+        console.log("Page Y / Page X :" +event.pageX + ":" +event.pageY) //pageX and pageY properties are actually related to the whole document page, not the viewport.
+    })
+
+    document.querySelector(".contentA").addEventListener("scroll",() => {
+        console.clear();
+        console.log("How much Y axis scrolled screenTop:" +targetDiv.scrollTop);
+        console.log("ScrollHeight and ScrollWidth:"  +targetDiv.scrollHeight + " " +targetDiv.scrollWidth);
+        
+        console.log("OffsetHeight and OffsetWidth:"  +targetDiv.offsetHeight + " " +targetDiv.offsetWidth);
+        // offsetWidth and offsetHeight return the width and height of an element in pixels including padding,border and scrollbar.
+        
+        console.log("ClientHeight and ClientWidth:"  +targetDiv.clientHeight + " " +targetDiv.clientWidth);
+       // clientWidth and clientHeight return the width and height of an element in pixels but not padding,border, margin and scrollbar.
+       
+      
+    });
+</script>
+</html>
