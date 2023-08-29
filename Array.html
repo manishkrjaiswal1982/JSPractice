@@ -143,10 +143,13 @@
     </ul>
 
     <div class="topicTostudy"></div>
-    <div class="contentA" style="font-size: 40px;width:400px;height:400px;border:10px #000 solid;overflow:scroll;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi quae omnis, quaerat voluptas sit placeat atque aut numquam nihil! Perspiciatis necessitatibus ut nobis dignissimos commodi quos veniam, corrupti suscipit libero laborum dolores ullam doloremque quis iste atque sint consequuntur id cupiditate ipsum, eveniet nostrum voluptates. Quos exercitationem nisi, voluptates quidem sit sequi quibusdam voluptatem delectus autem ipsum quaerat reiciendis dolorum odio iure magnam possimus voluptatibus vero aut dolorem nulla, cum, sint inventore perspiciatis. Aut, debitis voluptates. Ratione, cumque enim necessitatibus quis perspiciatis dolorem in deleniti architecto voluptates a vitae earum? Odit ea neque ipsam voluptatum porro fuga officia adipisci explicabo sunt, qui et quaerat, dolorem natus. Earum nostrum est fugit aspernatur quis quas, recusandae dolorum voluptas vitae voluptate repellat accusamus explicabo blanditiis et deleniti exercitationem maiores! Fugiat ratione mollitia ea est. Est voluptates nihil nostrum ad, fugit voluptatum distinctio corrupti numquam dignissimos dolores, labore cum beatae cumque provident. Nam sunt modi corporis eius ipsa similique magni explicabo excepturi provident! Delectus, provident cumque mollitia ea praesentium officiis veniam nemo eum incidunt cum ut facilis distinctio maxime reprehenderit vero, atque voluptatum, veritatis impedit adipisci. Aspernatur officiis ipsa beatae aliquam, placeat enim optio doloribus debitis esse eaque cupiditate? Enim possimus deleniti velit eligendi!</div>
+    <div class="contentA" onmousedown= "mouseButtonDetect(event)" style="font-size: 40px;width:400px;height:400px;border:10px #000 solid;overflow:scroll;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi quae omnis, quaerat voluptas sit placeat atque aut numquam nihil! Perspiciatis necessitatibus ut nobis dignissimos commodi quos veniam, corrupti suscipit libero laborum dolores ullam doloremque quis iste atque sint consequuntur id cupiditate ipsum, eveniet nostrum voluptates. Quos exercitationem nisi, voluptates quidem sit sequi quibusdam voluptatem delectus autem ipsum quaerat reiciendis dolorum odio iure magnam possimus voluptatibus vero aut dolorem nulla, cum, sint inventore perspiciatis. Aut, debitis voluptates. Ratione, cumque enim necessitatibus quis perspiciatis dolorem in deleniti architecto voluptates a vitae earum? Odit ea neque ipsam voluptatum porro fuga officia adipisci explicabo sunt, qui et quaerat, dolorem natus. Earum nostrum est fugit aspernatur quis quas, recusandae dolorum voluptas vitae voluptate repellat accusamus explicabo blanditiis et deleniti exercitationem maiores! Fugiat ratione mollitia ea est. Est voluptates nihil nostrum ad, fugit voluptatum distinctio corrupti numquam dignissimos dolores, labore cum beatae cumque provident. Nam sunt modi corporis eius ipsa similique magni explicabo excepturi provident! Delectus, provident cumque mollitia ea praesentium officiis veniam nemo eum incidunt cum ut facilis distinctio maxime reprehenderit vero, atque voluptatum, veritatis impedit adipisci. Aspernatur officiis ipsa beatae aliquam, placeat enim optio doloribus debitis esse eaque cupiditate? Enim possimus deleniti velit eligendi!</div>
     <button id="btn1" type="button">Button.....1</button>
     <button id="btn2" type="button" onclick="getTopic();">Click here to know about study materials.</button>
-    
+    <button id="btn3" type="button" onClick="fcbAdd(3,4,fcb1)">Callback function1</button>
+    <button id="btn4" type="button" onClick="fcbAdd(30,40,fcb2)">Callback function2</button>
+    <button id="btn5" type="button" onClick="fcbAdd(30,40,function(){console.log('Anynomous fn')})">Callback function3</button>
+
     <h2>Window Object</h2>
     <button class="fancy-button" onclick="openWin()">Open window </button>&nbsp;&nbsp;<button class="fancy-button" onclick="closeWin()">Close window </button>
     <button class="fancy-button" onclick="resizeWin()">Resize window </button>
@@ -155,6 +158,11 @@
     <button class="fancy-button" onclick="locReload()">Reload Method </button>
     <button class="fancy-button" onclick="locAssign()">Assign Method</button>
     <button class="fancy-button" onclick="locReplace()">Replace Method</button>
+
+
+    <br><br><div class="label1">Input the texts.</div>
+    <input type="text" id="textBox1" placeholder="Type some texts" onkeydown="detectKey(event)">
+
 </body>
 <script>
     // console.log(document.querySelector(".name"));
@@ -297,7 +305,7 @@ let getTopic = () => {
 
     let targetDiv = document.querySelector(".contentA");
     // console.log("How much Y axis scrolled screenTop:" +targetDiv.scrollTop);
-    console.log("How much X axis scrolled through screenLeft:" +targetDiv.scrollLeft);
+    console.log("How much X axis scrolled through scrollLeft:" +targetDiv.scrollLeft);
 
     // Mouse event co-ordinate
     document.querySelector(".contentA").addEventListener("mousemove", function(event){
@@ -323,5 +331,103 @@ let getTopic = () => {
        
       
     });
+// Detect copy/paste/cut events
+// Dont add keyword "on" with event on addEventListner. While it is mandatory with inline event like onCopy() etc.
+    document.querySelector(".contentA").addEventListener("copy",() =>{
+        // console.clear();
+        console.log("you Copied the texts.")
+    });
+
+    document.querySelector("#textBox1").addEventListener("cut",() =>{
+        // console.clear();
+        console.log("you cut the texts.")
+    });
+
+    document.querySelector("#textBox1").addEventListener("paste",() =>{
+        // console.clear();
+        console.log("you paste the texts.")
+    });
+
+    // console.assert(expression, object). The console.assert() method is used in programming to assert that a given condition is true. If the condition is false, an error message is logged to the console along with a stack trace.
+    const x = 1;
+    const y = 5;
+    const reason = 'x is expected to be less than y';
+    console.assert(x < y, {x, y, reason});
+
+    // Keys detection
+    let detectKey = function(e) {
+    // console.log("key pressed");
+    let ke;
+
+    switch (true) {
+        case e.metaKey:
+            ke = "Meta Key";
+            break;
+        case e.ctrlKey:
+            ke = "Control Key";
+            break;
+        case e.shiftKey:
+            ke = "Shift Key";
+            break;
+        case e.altKey:
+            ke = "Alt Key";
+            break;
+        default:
+            ke = "Other Key";
+    }
+
+    // console.warn(ke);
+    console.log("Key pressed:" +e.key) //"key" property is used with only keyboard's "keydown" event
+    }; 
+
+    let mouseButtonDetect = function (e){
+        let buttonM = e.button; //Return "0" for left button, "1" for middle button and "2" for right button
+        console.clear();
+        console.log("You pressed button:" +buttonM);
+    }
+
+    // Detect online/offline of the user
+    if(navigator.onLine) { console.log("You are online as of now."); }
+    else { console.log("You are offline as of now."); }
+
+    window.addEventListener("online",function(){
+        console.log("AddeventListner: you are online.")
+    });
+
+    window.addEventListener("offline",function(){
+        console.log("AddeventListner: you are offline.")
+    });
+    
+    // Type of functions
+    // Immediately Invoked Function Expression (IIFE)
+    // Generator Function
+    // Callback Function
+    // Higher-Order Function
+
+    // Start - Immediately Invoed Function Expression is are functions that are executed when they are initialized.
+
+    (function(){
+        console.log("Immediately imvoked functions expression.........")
+    })();
+
+    // End - Immediately Imvoked Function Expression
+
+    // start - callback function
+
+    let fcb1 = () => {
+        console.log("Callback function 1:\n")
+    }
+
+    let fcb2 = () => {
+        console.log("Callback function 2:\n")
+    }
+
+    let fcbAdd = (n1,n2,callback) => {
+        console.log("Addition through callBack function:" +n1+n2);
+        callback();
+    }
+     // End - callback function
+
+
 </script>
 </html>
