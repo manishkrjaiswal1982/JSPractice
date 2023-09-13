@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <title>Document</title>
+    <script type ="module" src="./scriptImport.js"></script> 
+    <style>
+        .custom-list li::marker { 
+            
+            color: #00FF00 !important;
+            color: var(--bullet-color, blue) !important;            
+        }
+    </style>
+
     <script>
         let arr1 = [12,223,33,4,5,33,6,5,12];
         let arr2 = [], arr3 = [];
@@ -30,7 +40,7 @@
         let a1 = arr5.every(function(num){
             if (num > 70) { return num}
         })
-        console.log("a1 value is: " + a1)
+        console.log("a1 value iss: " + a1)
 
         let aSum = arr5.every(function(num){
             if (num%2 === 0) { return num}
@@ -60,7 +70,7 @@
 
         // Check if two array are similar End
         
-          let a2 = Array.from("12222333q34243");
+          let a2 = Array.from("12222333q34243AmanUMAr");
           console.log("Type of a2" +Object.prototype.toString.call(a2) + " Value is:" +a2);
           console.log(a2.length)
 
@@ -132,6 +142,8 @@
     </script>
 </head>
 <body onresize="resizeWindow();">
+    <br/><br/><a href = "javascript:void(0);">It will do nothing.</a> 
+    <!-- void(0) or void 0  - tells the browser to "do nothing" i.e., prevents the browser from reloading or refreshing the page -->
     <div class="array1" id="mainArray"></div>
     <ul class="name">
         <li>M</li>
@@ -162,12 +174,22 @@
 
     <br><br><div class="label1">Input the texts.</div>
     <input type="text" id="textBox1" placeholder="Type some texts" onkeydown="detectKey(event)">
+    <ul class="custom-list">Custom List
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <div class="bankDiv"></div>
+    <div id="ModuleDiv"></div>
 
+    
+        
+    
 </body>
 <script>
     // console.log(document.querySelector(".name"));
     let obj1 = document.querySelector(".name").getElementsByTagName("li");
-    console.log(obj1)
+    console.log("HH: " +obj1)
     console.log(Object.prototype.toString.call(obj1));
     console.log(obj1.length);
     console.log(document.all)
@@ -191,7 +213,7 @@
     });
 
 
-    // Function expression
+    // Function expression "f1" defines function name but not the variable
     let f1 = function(a,b){
     return Math.floor(a+b);
     }
@@ -199,6 +221,7 @@
     //Arrow function
     let f2 = (a,b) =>{
         return Math.floor(a-b);
+        
     }
 
     let sum = f1(10,23);
@@ -300,8 +323,10 @@ let getTopic = () => {
     // history.go(1) or history.go(-1) to move next one or back one in the browser history
 
     // Window object 2 properties
-    console.log("How much X axis scrolled:" +window.pageXOffset);
-    console.log("How much Y axis scrolled:" +window.pageYOffset);
+    window.addEventListener('scroll', function() {
+        console.log("How much Window - X axis scrolled:" +window.pageXOffset);
+        console.log("How much Window - Y axis scrolled:" +window.pageYOffset);
+    });
 
     let targetDiv = document.querySelector(".contentA");
     // console.log("How much Y axis scrolled screenTop:" +targetDiv.scrollTop);
@@ -349,7 +374,7 @@ let getTopic = () => {
     });
 
     // console.assert(expression, object). The console.assert() method is used in programming to assert that a given condition is true. If the condition is false, an error message is logged to the console along with a stack trace.
-    const x = 1;
+    const x = 6;
     const y = 5;
     const reason = 'x is expected to be less than y';
     console.assert(x < y, {x, y, reason});
@@ -427,7 +452,156 @@ let getTopic = () => {
         callback();
     }
      // End - callback function
+    //   console.log("Arguments length:" +arguments.length)
+
+    // Closure
+    // Lexical Scope
+    // A closure is a function having access to parent scope. It preserve the data from outside. or in other defination, a closure is a inner function that has access to the outer function's variables.
+    // A closure is a function having access to the parent scope, even after the parent function has closed.
+    // For every closure we have three scopes: Local scope, Outer scope and Global scope. Example below:
+    Gvar1 = "Global variable";
+    let outerfn1 = () => {
+        let Ovar1 = "Outer function variable";
+        document.write("<br>" + Ovar1 + "<br>");
+        let innerfn1 = () => {
+            let Ivar1 = "Inner function variable";
+            document.write("<br>" + Ivar1 +"<br>");
+            document.write("<br>" + Ovar1 + "<br>");
+            document.write("<br>" + Gvar1 + "<br>");
+        }
+        innerfn1();
+    }
+    outerfn1();
+
+    
+    const list = document.querySelector('.custom-list');
+    // Function to change the color
+    function changeBulletColor(colora) {    
+        list.style.setProperty('--bullet-color', colora);
+    }
+    changeBulletColor("#FFF000");
+
+    // CORS (Cross Origin Resource Sharing) - Issue happens when requests are sent from domain/origin "A" to domain/oririn "B".
+    /* Browser sends pre-flight request to server. Browser send the request in form of header having information 
+        => request methods like GET/POST/Update/Delete etc
+        => user agent/hostname
+        => Domain / status / protocol
+        => HTTP body
+        => Access control Allow origin - should be either * or requested domain to avoid such error
+    */
+
+    //    Call / Apply / Bind Methods are called the Function Borrowing too.
+    let object1 = {
+        name: "Manish Kumar",
+        Designation: "Senior Technical Developer"
+    }
+
+    let object2 = {
+        name: "Manoj Kumar",
+        Designation: "Elearning Developer"
+    }
+
+    let printObjectDetails = function(city, qual){
+        console.warn(this.name + " " + city + " " + qual);
+    }
+
+    // let printObjectDetails = () =>{
+    //     console.log(this.name)
+    // } There is some conflication with arrow function and binding with object, hence should user normal or expression function.
+
+    printObjectDetails.call(object1, "Delhi","MCA");
+    printObjectDetails.call(object2, "Bihar", "MA");
+    printObjectDetails.apply(object2, ["MP", "BA"]); //Pass an array instead of multiple arguments
+    
+    let b1 = printObjectDetails.bind(object1, "Punjab","Phd.");
+    b1();
+
+    /* Error Type
+    403 - Forbidden error from server
+    404 - Page Not Found
+    500 - Internal Server Error
+    502/504 - Bad Gateway / Gateway Timeout
+    */
+
+   /* Chrome Developer Tool
+   Coverage / Request Blocking / monitor / MonitorEvents / debug directly from console / copy
+   ?_ / 
+   */
+
+  let arr98 = [11,22,33,44,55,44,33,22,11,0];
+  let arr97 = arr98.slice(6); //Slice update in new array and extract part of the array.
+  console.log("Slice example:" +arr97);
+  arr98.splice(2, 1, 2, 320); //Splice don't update in new array but work on existing array. It just work as push/pop but in mid of the array.
+  console.log("Splice example:" +arr98);
+
+  //Asynchronous Javascript
+let BankName = ["SBI", "PNB", "HDFC", "ICICI"];
+
+let getRecord = () => {
+    setTimeout(() => {
+        document.querySelector(".bankDiv").innerHTML = "<ul>" +
+        BankName.map(val => {
+        return `<li>${val}</li>`; 
+        }).join('') + 
+        "</ul>";
+    }, 1000);  
+}
+
+let addRecord = () => {
+    return new Promise ((resolve,reject) => {
+        setTimeout(() => {
+        BankName.splice(1,0, "Canara", "Kotak");
+        resolve();
+        // let error = false;
+        // if(!error){
+        //     resolve();
+        // }else{
+        //     reject("kuch locha hai");
+        // }
+    }, 2000); 
+    });
+      
+}
+// getRecord();
+let start = async () => {    
+    await addRecord();
+    getRecord();    
+}
+start();
 
 
+// Cookie: To store small ammount of data in browser. The cookies limit upto 4KB size and number of cookie are upto 20. Cookies are sent to server through http header in each request.
+alert(`initial cookie shown: ${document.cookie}`);
+
+let mykey = prompt("Enter you key");
+let myvalue = prompt("Enter the value")
+document.cookie = `${encodeURIComponent(mykey)}=${encodeURIComponent(myvalue)}`;
+localStorage.setItem(mykey,myvalue); // local storage
+for (let i=0; i<=localStorage.length; i++){
+    if (localStorage.key(i) == "hjhjh") {
+    console.log(`removed key ${localStorage.key(i)}`)
+    localStorage.removeItem(localStorage.key(i));
+    }
+}
+
+// localStorage.clear(); //Clear local storage completely
+// localStorage.length; //Find local storage length
+// localStorage.key(0); //Find local storage key value at index set
+
+console.log(`The value at local storage at key ${localStorage.getItem(mykey)} is: ${localStorage.getItem(myvalue)}`)
+alert(`Updated cookie shown: ${decodeURIComponent(document.cookie)}`);
+//Local storage: to store the data from particular domain. Local storage are not sent to server like cookie. This data doesn't loose even page or browser refresh. (page or browser closing/restarting)
+
+//Session storage - the data is not accessible from another tab of same browser. Data survive on page refersh but not opening/closing the tab.
+sessionStorage.setItem("1st session key","1st session value");
+console.log("The session value is: " + sessionStorage.getItem('1st session key'));
+
+//Strorage event fires when localstorage value gets changed.
+window.onstorage = (e) =>{
+    alert(`local storage value changed....`)
+}
+
+// JSON.stringify(object) //Convert object to json string
+// JSON.parse(string) //Convert string to json object
 </script>
 </html>
