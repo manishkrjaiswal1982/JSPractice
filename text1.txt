@@ -1,0 +1,13 @@
+To mitigate render-blocking issues and improve page load performance, you can 
+employ the following techniques below:
+
+1. Asynchronous Loading: Use the async or defer attribute with the script tag to load 
+    JavaScript files asynchronously.     
+    
+    <script src="script.js" async></script>  or <script src="script.js" defer></script>       
+
+2. Move Scripts to the Bottom: Place script tags just before the closing body tag.
+3. Lazy Loading: Lazy-loading defers the loading and execution of JavaScript until it's 
+    required, improving the initial page load time.
+    
+    <script src="script.js" defer="true" type="module"></script>

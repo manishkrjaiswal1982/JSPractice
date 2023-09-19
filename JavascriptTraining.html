@@ -6,7 +6,7 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <title>Document</title>
-    <script type ="module" src="./scriptImport.js"></script> 
+    <script type ="module" defer="true" src="./scriptImport.js"></script> 
     <style>
         .custom-list li::marker { 
             
@@ -137,7 +137,135 @@
         console.log(Object.prototype.toString.call(squareRoot));
         console.log(is_array(arr1));
 
+        // Hoisting
+        /* In JavaScript, Hoisting is the default behavior of moving all the declarations at the top of the scope before code execution.
+        It allows us to call functions before even writing code.
+        Note: JavaScript only hoists declarations, not initializations. Hoisting example below.
+        Note: Hosting with let and const are different than var.
+        */
+
+        console.log(a);
+        hoisting();
+        // console.log(b);
+        // hoisting_FE();
         
+        var a = 5;
+        let hoisting_FE = function(){
+            console.log("function expression");
+        }
+
+        function hoisting(){
+            console.log("Simple function");
+        }
+
+        let b = 5;
+
+        // When you use setTimeout with a delay of 0 milliseconds, it doesn't mean that the
+        // function will execute immediately; rather, it means the function will be 
+        // scheduled to run as soon as the JavaScript event loop becomes idle.
+        console.log("Start");
+
+        setTimeout(function() {
+        console.log("Inside setTimeout");
+        }, 0);
+
+        console.log("End");
+       
+        // JS is single threaded, non-blocking or asynchronus concurrent language means code will be executed line by line.
+        // It has call stack, web API, callback queue, an event loop.
+        /*
+        Call Stack - call stack is a data structure, where the code is currently executing. i.e When a function is called, it's pushed onto the call stack. When a function returns, it's removed from the stack.
+        Web API - Web APIs are provided by the browser's environment. i.e it allows JavaScript to interact with external resources, such as making HTTP requests, handling timers etc. When you use a function like setTimeout or make an AJAX request, the actual work is done by the Web API, not the JavaScript engine.
+        Callback Queue - The callback queue is a data structure that that holds callback functions.
+        Event Loop - If the call stack is empty, and there are functions in the callback queue, the event loop will move a callback function from the queue to the call stack for execution. This process allows JavaScript to handle asynchronous operations without blocking the main thread.
+        Example below for Event loop and above all concept
+        */
+        console.log("Start");
+
+        setTimeout(function () { //  schedules a callback to run after 1000 milliseconds. The actual timing is managed by the Web API.
+        console.log("Timeout callback");
+        }, 1000);
+
+        fetch("https://fakestoreapi.com/carts") //asynchronous HTTP request and registers callbacks to handle the response. Handled by Web API.
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log("Data from API:", data);
+        });
+
+        console.log("End");
+        
+        // Temporal Dead Zone
+        console.log(x1); // ReferenceError: Cannot access 'x' before initialization
+        let x1 = 10;
+        
+        /*
+        A temporal dead zone (TDZ) is the block where a variable is inaccessible until the moment the computer initializes it with a value. 
+        The Temporal Dead Zone is a concept related to the use of variables declared with the let and const keywords.
+        let and const have 2 differences than var
+        1. They are blocked scope.
+        2. Accessing the var before initialized throw undefined error, while accessing let and const throw "reference error".   
+        */
+        
+        // Microtask Queue - A Microtask queue is a queue of tasks that are executed after the current task. The microtask queue is handled by the JavaScript engine before it moves on to the next task in the callback queue.
+        /* Microtask queue is handled by the JavaScript engine before it moves on to the
+           next task in the callback queue. The Callback queue is handled by the 
+           JavaScript engine after it has executed all tasks in the microtask queue.*/
+        console.log('start');
+ 
+        setTimeout(function() {
+            console.log('setTimeout');
+        }, 0);
+    
+        Promise.resolve().then(function() {
+            console.log('promise resolve');
+        });
+    
+        console.log('end');
+
+      
+
+        /*
+        In the example above, the ‘setTimeout’ callback is added to the callback queue while promise's callback in the micro queue.
+        The output of the above code
+        start
+        end
+        promise resolve
+        setTimeout
+        */
+
+        // Benefit of External script file -  may gets cached or orgnizing code.
+        /* Render blocking - when html parsing is blocked due to execution of script file.
+        It may block the html parsing if inline script, external file script in head tag
+        without 'async' or 'defer' attribute.
+
+        To mitigate render-blocking issues and improve page load performance, you can 
+        employ the following techniques below:
+
+        1. Asynchronous Loading: Use the async or defer attribute with the script tag to load 
+           JavaScript files asynchronously.            
+
+        2. Move Scripts to the Bottom: Place script tags just before the closing body tag.
+        3. Lazy Loading: Lazy-loading defers the loading and execution of JavaScript until it's 
+            required, improving the initial page load time.
+
+        By addressing render-blocking issues, you can ensure that your web pages load 
+        faster, provide a better user experience, and improve search engine optimization
+        (SEO) rankings, as faster-loading pages are favored by search engines.
+        */
+
+        /*
+        These 2 are not limited to javascript only. These technique can be used in any lang.
+        Throttling - Throttling or sometimes also called throttle function is used to call a function after 
+        every millisecond or a particular interval of time only the first click is executed immediately.
+        As example if we call any function on rapid events like scrolling, resizing, typing, or mouse movements 
+        window scroll, the function will be called multiple time which is not desired, hence we can control it 
+        through limiting a particular interval of time only.
+        
+        Debouncing - The purpose of debouncing is to ensure that a function is only executed 
+        after a certain period of inactivity, rather than being triggered immediately on every event.
+        */        
         
     </script>
 </head>
@@ -155,6 +283,8 @@
     </ul>
 
     <div class="topicTostudy"></div>
+    <button id="btn6" type="button" onclick="fn99();">Non-Throttle</button>
+    <button id="btn7" type="button">Throttle</button>
     <div class="contentA" onmousedown= "mouseButtonDetect(event)" style="font-size: 40px;width:400px;height:400px;border:10px #000 solid;overflow:scroll;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi quae omnis, quaerat voluptas sit placeat atque aut numquam nihil! Perspiciatis necessitatibus ut nobis dignissimos commodi quos veniam, corrupti suscipit libero laborum dolores ullam doloremque quis iste atque sint consequuntur id cupiditate ipsum, eveniet nostrum voluptates. Quos exercitationem nisi, voluptates quidem sit sequi quibusdam voluptatem delectus autem ipsum quaerat reiciendis dolorum odio iure magnam possimus voluptatibus vero aut dolorem nulla, cum, sint inventore perspiciatis. Aut, debitis voluptates. Ratione, cumque enim necessitatibus quis perspiciatis dolorem in deleniti architecto voluptates a vitae earum? Odit ea neque ipsam voluptatum porro fuga officia adipisci explicabo sunt, qui et quaerat, dolorem natus. Earum nostrum est fugit aspernatur quis quas, recusandae dolorum voluptas vitae voluptate repellat accusamus explicabo blanditiis et deleniti exercitationem maiores! Fugiat ratione mollitia ea est. Est voluptates nihil nostrum ad, fugit voluptatum distinctio corrupti numquam dignissimos dolores, labore cum beatae cumque provident. Nam sunt modi corporis eius ipsa similique magni explicabo excepturi provident! Delectus, provident cumque mollitia ea praesentium officiis veniam nemo eum incidunt cum ut facilis distinctio maxime reprehenderit vero, atque voluptatum, veritatis impedit adipisci. Aspernatur officiis ipsa beatae aliquam, placeat enim optio doloribus debitis esse eaque cupiditate? Enim possimus deleniti velit eligendi!</div>
     <button id="btn1" type="button">Button.....1</button>
     <button id="btn2" type="button" onclick="getTopic();">Click here to know about study materials.</button>
@@ -181,6 +311,9 @@
     </ul>
     <div class="bankDiv"></div>
     <div id="ModuleDiv"></div>
+    <div id="productFromJSON"></div>
+    <div id="TextFromTxt"></div>
+    <div id="productFromJSONFetchM"></div>
 
     
         
@@ -220,8 +353,7 @@
 
     //Arrow function
     let f2 = (a,b) =>{
-        return Math.floor(a-b);
-        
+        return Math.floor(a-b);        
     }
 
     let sum = f1(10,23);
@@ -247,15 +379,14 @@
         console.log("j value is:" +i);
         } 
     }
-    
     print();
 
     let de = document.documentElement
     console.log("de: " +de.lang)
     de.style.color = "red";
-//    document.title = "Allterree"
-
-console.log(document.domain);
+//  document.title = "Allterree"
+    document.activeElement
+    console.log(document.domain);
 
 let arrTopic = ["createTextNode_fn","replaceChild_fn", "cloneNode_fn", "contains_fn", "hasChildNodes", "hasAttribute"];
 let getTopic = () => {
@@ -429,7 +560,28 @@ let getTopic = () => {
     // Callback Function
     // Higher-Order Function
 
-    // Start - Immediately Invoed Function Expression is are functions that are executed when they are initialized.
+    // Higher-order functions in JavaScript are functions that operate on other functions, either by taking them as arguments, returning them as values, or both. 
+    // The map function applies a given function to each element of an array and returns a new array with the results.
+    const numbers = [1, 2, 3, 4, 5];
+    const squared = numbers.map((num) => num * num);
+    // Example of High-order functions are filter, reduce, forEach, sort, some and every etc.
+
+    // Generator functions return a generator object. Generator objects are used either by calling the next method on the generator object
+    // Generate Function generates three different numbers in three calls
+    function* fun() {
+        yield 10;
+        yield 20;
+        yield 30;
+    }
+    
+    // Calling the Generate Function
+    let gen = fun();
+    console.log(gen.next().value);
+    console.log(gen.next().value);
+    console.log(gen.next().value);
+    // Generate Function End 
+
+    // Start - Immediately Invoked Function Expression is are functions that are executed when they are initialized.
 
     (function(){
         console.log("Immediately imvoked functions expression.........")
@@ -487,6 +639,7 @@ let getTopic = () => {
         => user agent/hostname
         => Domain / status / protocol
         => HTTP body
+        => Cookies (Intially set by server to browser to detect if re-request made)
         => Access control Allow origin - should be either * or requested domain to avoid such error
     */
 
@@ -504,10 +657,6 @@ let getTopic = () => {
     let printObjectDetails = function(city, qual){
         console.warn(this.name + " " + city + " " + qual);
     }
-
-    // let printObjectDetails = () =>{
-    //     console.log(this.name)
-    // } There is some conflication with arrow function and binding with object, hence should user normal or expression function.
 
     printObjectDetails.call(object1, "Delhi","MCA");
     printObjectDetails.call(object2, "Bihar", "MA");
@@ -571,37 +720,126 @@ start();
 
 
 // Cookie: To store small ammount of data in browser. The cookies limit upto 4KB size and number of cookie are upto 20. Cookies are sent to server through http header in each request.
-alert(`initial cookie shown: ${document.cookie}`);
+// alert(`initial cookie shown: ${document.cookie}`);
 
-let mykey = prompt("Enter you key");
-let myvalue = prompt("Enter the value")
-document.cookie = `${encodeURIComponent(mykey)}=${encodeURIComponent(myvalue)}`;
-localStorage.setItem(mykey,myvalue); // local storage
+// let mykey = prompt("Enter you key");
+// let myvalue = prompt("Enter the value");
+// document.cookie = `${encodeURIComponent(mykey)}=${encodeURIComponent(myvalue)}`;
+// localStorage.setItem(mykey,myvalue); // local storage
 for (let i=0; i<=localStorage.length; i++){
     if (localStorage.key(i) == "hjhjh") {
     console.log(`removed key ${localStorage.key(i)}`)
     localStorage.removeItem(localStorage.key(i));
     }
 }
-
+//Local storage: to store the data from particular domain. Local storage are not sent to server like cookie. This data doesn't loose even page or browser refresh. (page or browser closing/restarting)
 // localStorage.clear(); //Clear local storage completely
 // localStorage.length; //Find local storage length
 // localStorage.key(0); //Find local storage key value at index set
 
-console.log(`The value at local storage at key ${localStorage.getItem(mykey)} is: ${localStorage.getItem(myvalue)}`)
-alert(`Updated cookie shown: ${decodeURIComponent(document.cookie)}`);
-//Local storage: to store the data from particular domain. Local storage are not sent to server like cookie. This data doesn't loose even page or browser refresh. (page or browser closing/restarting)
+// console.log(`The value at local storage at key ${localStorage.getItem(mykey)} is: ${localStorage.getItem(myvalue)}`)
+// alert(`Updated cookie shown: ${decodeURIComponent(document.cookie)}`);
 
 //Session storage - the data is not accessible from another tab of same browser. Data survive on page refersh but not opening/closing the tab.
 sessionStorage.setItem("1st session key","1st session value");
 console.log("The session value is: " + sessionStorage.getItem('1st session key'));
 
-//Strorage event fires when localstorage value gets changed.
+//Storage event fires when localstorage value gets changed.
 window.onstorage = (e) =>{
-    alert(`local storage value changed....`)
+    alert(`local storage value changed....`);
 }
 
-// JSON.stringify(object) //Convert object to json string
-// JSON.parse(string) //Convert string to json object
+let fn99 = () => {
+    console.log("Button Throttle clicked...");
+};
+
+// Start - Object Prototype - The JavaScript prototype property allows you to add new properties to object constructors.
+function Person(first, last, age, eyecolor) { //example of constructor function
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+  this.eyeColor = eyecolor;
+}
+const myFather = new Person("A","Kumar",67, "white");
+const myMother = new Person("N","Devi",63, "normal");
+console.log(myFather);
+console.log(myMother);
+myMother.profession = "Housewife"; // Added instance member, and used on object directly.
+console.log(myFather);
+console.log(myMother);
+// classname.prototype.key = ""; //Syntax for adding prototype member, only added on class directly
+Person.prototype.profession = "Job";
+console.log(myFather.profession);
+console.log(myMother.profession);
+// End
+
+// Javascript object has special property called prototype that is either null or references another objects.
+let a11 = {
+    name: "MK"
+};
+
+let p = {
+    fun: () => {
+        console.log("--------fun is called---------")
+    }
+};
+
+a11.__proto__ = p;
+a11.fun();
+
+// Block scoping, also known as lexical scoping, is a feature in JavaScript that defines 
+// the scope or visibility of variables and functions within a specific block of code
+// Block scoping was introduced in ECMAScript 6 (ES6) through the let and const declarations, 
+// providing an alternative to the function-level scope of variables declared with var.
+
+function example() {
+  if (true) {
+    let x = 10; // Block-scoped variable
+  }
+  console.log(x); // Error: x is not defined
+}
+
+function example() {
+  if (true) {
+    var y = 20; // Function-scoped variable
+  }
+  console.log(y); // 20, y is accessible here
+}
+
+// Start - Destructuring Array and Destructuring object
+let user = ["MK", "Delhi", 40, "MCA"];
+let [name, city, age, course] = user;
+console.log(name + " " + city + " " + age + " " +course);
+
+let user1 = {
+    name1: "MKJ",
+    id1: "#F0001"
+}
+
+let {name1, id1} = user1;
+console.log(name1 + " " + id1);
+// End
+
+// Start - Rest operator
+let sumR = function (nameR, ...args){ //Rest operator is used when function to be declared
+    let tempSum = 0;
+    for (let i in args){
+        tempSum += args[i];
+    }
+    document.write (`${nameR} got score: ${tempSum}`);   
+}
+sumR("Jaiswal jee", 77,11,22);
+let arr102 = [77,10,22]
+sumR("<br>Manish jee - Spread Operator", ...arr102); //Spread operator is used when function is being called to spread the array items
+// End - Rest operator
+
+// Strict Mode on
+"use strict";
+a101 = 101;
+console.log("The value of var a101 is: " +a101);
+
+// x += y is equivalent to x = x + y
+
+
 </script>
 </html>
