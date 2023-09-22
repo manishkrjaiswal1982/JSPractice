@@ -114,7 +114,7 @@
             console.log("drag started:" +e1);
             if (e1.dataTransfer){
                 ele1 = e1.target.id
-                console.log(ele1)
+                console.log("x:" +ele1)
             }
             else{
                 console.error("Data transfer object is undefined.");
@@ -126,6 +126,7 @@
             ev.preventDefault();
             ev.target.appendChild(document.getElementById(ele1));
             arr1.push(ele1);
+            console.log("drop event called...")
                        
         }
 

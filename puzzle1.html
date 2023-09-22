@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/puzzle1.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+    <script src="js/puzzle1.js" async></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Sliding Tile Puzzle</h1>
+        <ul class="NumGame">
+            <li id="li1" draggable="true" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event)">A</li>
+            <li id="li2" draggable="true" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event)">B</li>
+            <li id="li3" draggable="true" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event)">C</li>
+            <li id="li4" draggable="true" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event)">D</li>
+            <li id="li5" draggable="true" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event)">E</li>
+            <li id="li6" draggable="true" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event)">F</li>
+            <li id="li7" draggable="true" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event)">G</li>
+            <li id="li8" draggable="true" ondragstart="dragstart_handler(event)" ondragend="dragend_handler(event)">H</li>
+            <li id="li9" class="empty" ondrop="drop_handler(event);" ondragover="dragover_handler(event);"></li>
+        </ul>        
+    </div>
+</body>
+</html>
