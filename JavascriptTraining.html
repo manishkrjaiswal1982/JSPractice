@@ -144,10 +144,10 @@
         Note: Hosting with let and const are different than var.
         */
 
-        console.log("a value through hoisting is: " +a);
+        console.log("a value through hoisting before initalization is: " +a);
         hoisting();
         // console.log(b);
-        // hoisting_FE();
+        //  hoisting_FE();
         
         var a = 5;
         let hoisting_FE = function(){
@@ -157,7 +157,7 @@
         function hoisting(){
             console.log("Simple function");
         }
-
+        console.log("a value through hoisting after initalization is: " +a);
         let b = 5;
 
         // When you use setTimeout with a delay of 0 milliseconds, it doesn't mean that the
@@ -180,7 +180,7 @@
         Event Loop - If the call stack is empty, and there are functions in the callback queue, the event loop will move a callback function from the queue to the call stack for execution. This process allows JavaScript to handle asynchronous operations without blocking the main thread.
         Example below for Event loop and above all concept
         */
-        console.log("Start");
+        console.log("Start.......");
 
         setTimeout(function () { //  schedules a callback to run after 1000 milliseconds. The actual timing is managed by the Web API.
         console.log("Timeout callback");
@@ -328,7 +328,7 @@
     // To make the comment
     var newComment = document.createComment("This is comment through dynamic Javascript");
     console.log(newComment);
-    console.log("this is:" +this);
+    console.log("this is:" +this); //This target the entire window here.
 
     // Through JQuery
     $(".name").find("li").each(function(index,item){
@@ -719,6 +719,7 @@ for (let i=0; i<=localStorage.length; i++){
     localStorage.removeItem(localStorage.key(i));
     }
 }
+// localStorage.getItem("usrObj"); // to find out value of key of usrObj
 //Local storage: to store the data from particular domain. Local storage are not sent to server like cookie. 
 // This data doesn't loose even page or browser refresh. (page or browser closing/restarting)
 // localStorage.clear(); //Clear local storage completely
